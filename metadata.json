@@ -1,0 +1,6 @@
+{
+  "name": "Action Lens",
+  "description": "An AI-powered tool that analyzes images to guess the human actions being performed.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
