@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Triggers the workflow whenever you push to the main branch
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-node: 20 # Uses Node 20 LTS
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci # Clean install dependencies matching package-lock.json
+
+      - name: Build Project
+        run: npm run build # Compiles React app into the 'dist' folder
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # Vite outputs compilation assets here
+          branch: gh-pages # The branch the action will push production files to
